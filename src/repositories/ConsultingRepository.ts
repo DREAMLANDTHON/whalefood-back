@@ -8,10 +8,7 @@ export const ConsultingRepository = database.getRepository(Consulting).extend({
   async getsById(id: string) {
     return await 
     this.createQueryBuilder('consulting')
-    .where('consulting.userId = :id', { id }) // userId 컬럼으로 검색
+    .where('consulting.userId = :id', { id })
     .getMany();
   },
-  // async getByEmail(email: string) {
-  //   return await this.find({where:{email}});
-  // }
 });

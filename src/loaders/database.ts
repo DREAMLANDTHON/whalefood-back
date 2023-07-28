@@ -1,5 +1,4 @@
 import { env } from "./env";
-// import AWS from "aws-sdk";
 import { DataSource } from "typeorm";
 const { database } = env;
 export default new DataSource({
@@ -16,15 +15,3 @@ export default new DataSource({
   entities: [__dirname + "/../entities/*{.ts,.js}"],
   charset:'utf8mb4'
 });
-
-// const s3Client = new AWS.S3({
-//   signatureVersion: "s3v4",
-//   region: "ap-northeast-2",
-
-//   credentials: {
-//     accessKeyId: s3.accessKey!,
-//     secretAccessKey: s3.secretKey!
-//   }
-// });
-
-// export {  s3Client };

@@ -5,24 +5,18 @@ import {
   useExpressServer
 } from "routing-controllers";
 import morgan from "morgan";
-import connect from "../loaders/database";
 import { routingControllerOptions } from "../utils/RoutingConfig";
 import { logger, stream } from "../utils/Logger";
 import { Container } from "typedi";
-// import { useSwagger } from "./swagger";
-// import { useSentry } from "./sentry";
-// import { CustomJwtPayload } from "../common";
 import bodyParser from "body-parser";
 import DataSource from "./database";
-declare module "express" {
-  interface Request {
-    // user: {
-    //   jwtPayload: CustomJwtPayload;
-    //   token: string;
-    // };
-  }
-  interface Response{
-    timestamp : number;
+import session from 'express-session';
+import { useSwagger } from "./swagger";
+import { env } from "./env";
+const { sessionkey } = env;
+declare module 'express-session' {
+  interface SessionData {
+    user: any;
   }
 }
 
@@ -46,13 +40,20 @@ export class App {
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(morgan("combined", { stream }));
+    this.app.use(session({
+      secret: sessionkey.secretkey, // 세션 암호화를 위한 키 (임의로 설정)
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        maxAge: 60 * 60 * 1000, // 세션 유효 기간 (1시간)
+      },
+    }))
   }
   public async init(port: number): Promise<void> {
     try {
       routingUseContainer(Container);
       useExpressServer(this.app, routingControllerOptions);
-    //   useSwagger(this.app);
-    //   useSentry(this.app);
+      useSwagger(this.app);
       this.app.listen(port, () => {
         logger.info(`Server is running on http://localhost:${port}/api-docs`);
       });

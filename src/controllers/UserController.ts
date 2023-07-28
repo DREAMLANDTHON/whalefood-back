@@ -1,17 +1,15 @@
 import { Service } from "typedi";
 import {
-    Body,
-  Get,
+  Body,
   HttpCode,
   JsonController,
-  Param,
   Post,
   Req,
-  UseBefore
 } from "routing-controllers";
 import { CreateUserDto, LoginUserDto } from "../dtos/UserDto";
 import {UserService} from "../services/UserService"
 import { createResponseForm } from "../interceptors/transformer";
+import { Request } from "express";
 
 @JsonController("/auth")
 @Service()
@@ -29,10 +27,14 @@ export class UserController {
     }
     @HttpCode(201)
     @Post("/login")
-    public async login(@Body() loginUserDto: LoginUserDto) {
+    public async login(@Body() loginUserDto: LoginUserDto, @Req() req: Request) {
       try{
-        await this,this._userService.login(loginUserDto);
-        return createResponseForm(undefined);
+        await this._userService.login(loginUserDto);
+        const sessionData = req.session.user = {
+          id: 1,
+          nickname: loginUserDto.nickname,
+        };
+        return createResponseForm(sessionData);
       }catch(error){
         console.log(error);
       }

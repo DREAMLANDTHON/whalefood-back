@@ -1,4 +1,4 @@
-import { ERROR } from "../../errors";
+import { ERROR } from "../errors";
 
 type GenderType = "w" | "m" | "" ;
 type AgeType = 10 | 20 | 30 | 40 | 50 ;

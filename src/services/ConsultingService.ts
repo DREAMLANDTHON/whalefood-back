@@ -1,5 +1,4 @@
 import {Service} from "typedi";
-import {CreateUserDto, LoginUserDto} from "../dtos/UserDto"
 import { UserRepository } from "../repositories/UserRepository";
 import { ConsultingRepository } from "../repositories/ConsultingRepository";
 import { CreateConsultingDto } from "../dtos/ConsultingDto";

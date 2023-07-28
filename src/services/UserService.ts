@@ -8,12 +8,12 @@ export class UserService{
         this._userRepositroy=UserRepository;
     }
     public async register(createUserDto: CreateUserDto) {
-        const {email, password, gender, age, sexpref} = createUserDto;
-        return await this._userRepositroy.save(this._userRepositroy.create({email,password,gender,age,sexpref}));
+        const {nickname, password, gender, age, sexpref} = createUserDto;
+        return await this._userRepositroy.save(this._userRepositroy.create({nickname,password,gender,age,sexpref}));
     }
     public async login(loginUserDto: LoginUserDto) {
-        const {email, password} = loginUserDto;
-        const user = await this._userRepositroy.getByEmail(email);
+        const {nickname, password} = loginUserDto;
+        const user = await this._userRepositroy.getByNickname(nickname);
         if(user && password === user.password) {
             return true;
         }else {

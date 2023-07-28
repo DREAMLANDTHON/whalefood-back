@@ -5,7 +5,7 @@ export const UserRepository = database.getRepository(User).extend({
   async getById(id: string) {
     return await this.findOne({ where: { id } });
   },
-  async getByEmail(email: string) {
-    return await this.findOne({ where: { email } });
+  async getByNickname(nickname: string) {
+    return await this.findOne({ where: { nickname } });
   }
 });

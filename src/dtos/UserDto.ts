@@ -4,7 +4,7 @@ import { AgeType, GenderType, SexPrefType } from "../../type";
 export class CreateUserDto{
     @IsNotEmpty()
     @IsEmail()
-    public email: string;
+    public nickname: string;
 
     @IsNotEmpty()
     @IsString()
@@ -26,7 +26,7 @@ export class CreateUserDto{
 export class LoginUserDto{
     @IsNotEmpty()
     @IsEmail()
-    public email: string;
+    public nickname: string;
 
     @IsNotEmpty()
     @IsString()

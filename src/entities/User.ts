@@ -1,12 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from 'typeorm';
 import { defaultColumn } from './common/default-columns';
 import { AgeType, GenderType, SexPrefType } from '../../type';
+import { Consulting } from './Consulting';
 
 @Entity()
 export class User extends defaultColumn{
 
     @Column()
-    email: string;
+    nickname: string;
 
     @Column()
     password: string;
@@ -19,4 +20,7 @@ export class User extends defaultColumn{
 
     @Column()
     sexpref: SexPrefType|null;
+
+    @OneToMany(() => Consulting, consulting => consulting.user)
+    counselingRecords: Consulting[];
 }

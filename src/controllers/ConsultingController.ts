@@ -9,9 +9,10 @@ import {
   Req,
   UseBefore
 } from "routing-controllers";
-import { CreateUserDto, LoginUserDto } from "../dtos/UserDto";
 import { ConsultingService } from "../services/ConsultingService";
 import { CreateConsultingDto } from "../dtos/ConsultingDto";
+import { logger } from "../utils/Logger";
+import { createResponseForm } from "../interceptors/transformer";
 const nickname = "재민";
 
 @JsonController("/consulting")
@@ -23,9 +24,10 @@ export class ConsultingController {
     @Post("/chat")
     public async chatConculting(@Body() createConsultingDto:CreateConsultingDto) {
        try{
-        return this._consultingService.chatConsulting(nickname, createConsultingDto);
+        const data = this._consultingService.chatConsulting(nickname, createConsultingDto);
+        return createResponseForm(data);
        }catch(error) {
-        console.log(error);
+        logger.error(error);
        }
     }
 
@@ -33,7 +35,8 @@ export class ConsultingController {
     @Post("/list")
     public async consultingList() {
        try{
-        return this._consultingService.consultingList(nickname);
+         const data = this._consultingService.consultingList(nickname);
+         return createResponseForm(data);
        }catch(error) {
         console.log(error);
        }

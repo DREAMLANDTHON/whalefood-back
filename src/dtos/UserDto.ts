@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString, IsEmail, IsNumber } from "class-validator";
-import { AgeType, GenderType, SexPrefType } from "../../type";
+import { AgeType, GenderType, SexPrefType } from "../type";
 
 export class CreateUserDto{
     @IsNotEmpty()

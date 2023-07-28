@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, JoinColumn, ManyToOne } from 'typeorm';
 import { defaultColumn } from './common/default-columns';
-import { AgeType, GenderType, SexPrefType } from '../../type';
+import { AgeType, GenderType, SexPrefType } from '../type';
 import { User } from './User';
 ""
 @Entity()

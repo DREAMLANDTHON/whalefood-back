@@ -11,6 +11,7 @@ import {
 } from "routing-controllers";
 import { CreateUserDto, LoginUserDto } from "../dtos/UserDto";
 import {UserService} from "../services/UserService"
+import { createResponseForm } from "../interceptors/transformer";
 
 @JsonController("/auth")
 @Service()
@@ -20,7 +21,8 @@ export class UserController {
     @Post("/register")
     public async register(@Body() createUserDto : CreateUserDto) {
        try{
-        return this._userService.register(createUserDto);
+        await this._userService.register(createUserDto);
+        return createResponseForm(undefined);
        }catch(error) {
         console.log(error);
        }
@@ -29,7 +31,8 @@ export class UserController {
     @Post("/login")
     public async login(@Body() loginUserDto: LoginUserDto) {
       try{
-        return this,this._userService.login(loginUserDto);
+        await this,this._userService.login(loginUserDto);
+        return createResponseForm(undefined);
       }catch(error){
         console.log(error);
       }

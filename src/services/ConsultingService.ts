@@ -17,7 +17,7 @@ export class ConsultingService{
         const user = await this._userRepository.getByNickname(nickname);
         return this._consultingRepository.save(this._consultingRepository.create({title, content, user}));
     }
-    public async consultingList(nickname) {
+    public async consultingList(nickname:string) {
         const user = await this._userRepository.getByNickname(nickname);
         return await this._consultingRepository.getsById(user.id);
     }

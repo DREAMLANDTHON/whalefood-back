@@ -21,6 +21,9 @@ export class User extends defaultColumn{
     @Column()
     sexpref: SexPrefType|null;
 
+    @Column()
+    seesionId: string;
+
     @OneToMany(() => Consulting, consulting => consulting.user)
     counselingRecords: Consulting[];
 }

@@ -21,5 +21,8 @@ export const env = {
     },
     app: {
       port:Number(process.env.PORT)
+    },
+    api: {
+      gptkey:process.env.CHATGPT_API_KEY
     }
   };

@@ -11,6 +11,7 @@ import {UserService} from "../services/UserService"
 import { createResponseForm } from "../interceptors/transformer";
 import { Request } from "express";
 
+
 @JsonController("/auth")
 @Service()
 export class UserController {
@@ -31,7 +32,6 @@ export class UserController {
       try{
         await this._userService.login(loginUserDto);
         const sessionData = req.session.user = {
-          id: 1,
           nickname: loginUserDto.nickname,
         };
         return createResponseForm(sessionData);

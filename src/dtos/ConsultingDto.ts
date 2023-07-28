@@ -10,3 +10,13 @@ export class CreateConsultingDto{
     public content: string;
 }
 
+export class ChatDto{
+    @IsNotEmpty()
+    @IsString()
+    public systemContent: string;
+
+    @IsNotEmpty()
+    @IsString()
+    public userContent: string;
+}
+
